@@ -279,7 +279,7 @@ The `--lib` flag is similar to `-classpath` in `javac`, but specifically provide
 ```bash
 $ANDROID_HOME/build-tools/34.0.0/d8 \
     build/classes/com/example/hello/*.class \
-    --lib $ANDROID_HOME/platforms/android-34/android.jar
+    --lib $ANDROID_HOME/platforms/android-34/android.jar \
     --output build/dex
 ```
 
