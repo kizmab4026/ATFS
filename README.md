@@ -27,11 +27,13 @@ I believe that to understand a tool, you must first understand the problem it so
 
 This repository is structured into branches, each representing a chapter in the learning process.
 
-- `chapter-1-manual-build` (📍You are here): Building an Android app using only the raw SDK command-line tools.
+- `master` (📍You are here): Building an Android app using only the raw SDK command-line tools.
 
-- [`chapter-2-gradle-cli`](https://github.com/hethon/atfs/tree/chapter-2-gradle-cli): Introducing Gradle and the Android Gradle Plugin to automate the build, still without an IDE. `[Not published yet]`
+- [`chapter-2-gradle-cli`](https://github.com/hethon/atfs/tree/chapter-2-gradle-cli): Introducing Gradle build script to replace our manual build script, still without AGP and an IDE.
 
-- [`chapter-3-android-studio`](https://github.com/hethon/atfs/tree/chapter-3-android-studio): Finally opening the IDE, with the magic stripped away and a full understanding of the underlying system. `[Not published yet]`
+- [`chapter-3-agp`](https://github.com/hethon/atfs/tree/chapter-3-agp): Introduce the Android Gradle Pluging (AGP) to replace our custom taskes in Chapter 2. `[Not published yet]`
+
+- [`chapter-4-android-studio`](https://github.com/hethon/atfs/tree/chapter-3-android-studio): Finally opening the IDE, with the magic stripped away and a full understanding of the underlying system. `[Not published yet]`
 
 <br>
 
